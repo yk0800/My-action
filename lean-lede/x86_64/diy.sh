@@ -7,7 +7,7 @@ packages_path=package/openwrt-packages
 mkdir -p $packages_path
 
 git clone https://github.com/openwrt-develop/luci-theme-atmaterial $packages_path/luci-theme-atmaterial
-git clone https://github.com/Ameykyl/luci-app-koolproxyR $packages_path/luci-app-koolproxyR
+git clone https://github.com/frainzy1477/luci-app-clash $packages_path/luci-app-clash
 git clone https://github.com/rosywrt/luci-theme-rosy $packages_path/luci-theme-rosy
 
 # Modify default IP
