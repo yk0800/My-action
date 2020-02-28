@@ -35,6 +35,7 @@ jobs:
   
     - name: Build
       run: |
+        cd gitea
         TAGS="bindata sqlite sqlite_unlock_notify" make build
         
     - name: Upload Flies
