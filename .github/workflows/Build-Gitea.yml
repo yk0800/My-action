@@ -31,7 +31,7 @@ jobs:
     - name: Get Gitea source
       run: |
         git clone https://github.com/go-gitea/gitea.git
-        TAGS="bindata sqlite sqlite_unlock_notify" make build
+        
   
     - name: Build
       run: |
