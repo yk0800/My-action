@@ -1,0 +1,46 @@
+name: Go
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - 'gitea/run'
+      - '.github/workflows/Build-Gitea.yml'
+
+
+jobs:
+
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: Set up Go 1.13
+      uses: actions/setup-go@v1
+      with:
+        go-version: 1.13
+      id: go
+
+    
+
+    - name: Use Node.js 12.x
+      uses: actions/setup-node@v1
+      with:
+        node-version: 12.x
+    
+    - name: Get Gitea source
+      run: |
+        git clone https://github.com/go-gitea/gitea.git
+        TAGS="bindata sqlite sqlite_unlock_notify" make build
+  
+    - name: Build
+      run: |
+        TAGS="bindata sqlite sqlite_unlock_notify" make build
+        
+    - name: Upload Flies
+      uses: actions/upload-artifact@master
+      if: always()
+      with:
+       name: Gitea
+       path: gitea/gitea
+        
