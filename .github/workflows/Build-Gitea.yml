@@ -36,7 +36,7 @@ jobs:
     - name: Build
       run: |
         cd gitea
-        npm -v
+        node -v
         go version
         TAGS="bindata sqlite sqlite_unlock_notify" make build
         
