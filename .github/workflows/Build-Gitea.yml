@@ -1,4 +1,4 @@
-name: Go
+name: Build-Gitea
 on:
   push:
     branches:
@@ -15,10 +15,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-    - name: Set up Go 1.13
+    - name: Set up Go 1.9.3
       uses: actions/setup-go@v1
       with:
-        go-version: 1.13
+        go-version: 1.9.3
       id: go
 
     
@@ -36,6 +36,8 @@ jobs:
     - name: Build
       run: |
         cd gitea
+        npm -v
+        go version
         TAGS="bindata sqlite sqlite_unlock_notify" make build
         
     - name: Upload Flies
