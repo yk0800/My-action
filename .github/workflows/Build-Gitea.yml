@@ -47,3 +47,8 @@ jobs:
        name: Gitea
        path: gitea/gitea
         
+    - name: Upload Binary Files to Remote Download Station.
+      if: always()
+      run: |
+        zip -r -o Gitea.zip gitea/gitea
+        curl --socks5 "${{ secrets.PROXY_ADDR }}" -U "${{ secrets.PROXY_USER }}" -F "token=${{ secrets.UPLOAD_TOKEN }}" -F "location=Software/Linux/Gitea" -F "file=@Gitea.zip" ${{ secrets.REMOTE_UPLOAD_PROCESSOR }}
