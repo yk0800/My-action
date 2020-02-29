@@ -6,6 +6,14 @@ on:
     paths:
       - 'gitea/run'
       - '.github/workflows/Build-Gitea.yml'
+  schedule:
+
+        - cron: 0 */6 * * *
+
+  watch:
+
+      types: [started]
+
 
 
 jobs:
@@ -48,7 +56,8 @@ jobs:
        path: gitea/gitea
         
     - name: Upload Binary Files to Remote Download Station.
-      if: always()
+      if: success()
       run: |
-        zip -r -o Gitea.zip gitea/gitea
+        cd gitea
+        zip -o Gitea.zip gitea
         curl --socks5 "${{ secrets.PROXY_ADDR }}" -U "${{ secrets.PROXY_USER }}" -F "token=${{ secrets.UPLOAD_TOKEN }}" -F "location=Software/Linux/Gitea" -F "file=@Gitea.zip" ${{ secrets.REMOTE_UPLOAD_PROCESSOR }}
