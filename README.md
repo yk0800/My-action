@@ -6,14 +6,14 @@
 下载地址https://dl.ssrc.vip:88/Router/
 
 # 构建状态：
-x86_64 LEDE ![](https://img.shields.io/github/workflow/status/Build-and-Upload-Lean's-x86_64-LEDE?label=)
+x86_64 LEDE ![1](https://img.shields.io/github/workflow/status/Build-and-Upload-Lean's-x86_64-LEDE?label=)
 
-RaspberryPi LEDE：![](https://img.shields.io/github/workflow/status/Build-and-Upload-Lean's-RaspberryPi-LEDE?label=)
+RaspberryPi LEDE：![2](https://img.shields.io/github/workflow/status/Build-and-Upload-Lean's-RaspberryPi-LEDE?label=)
 
-原版Openwrt：![](https://img.shields.io/github/workflow/status/Build-and-Upload-OpenWRT-x86_64?label=)
+原版Openwrt：![3](https://img.shields.io/github/workflow/status/Build-and-Upload-OpenWRT-x86_64?label=)
 
-K2p LEDE ![](https://img.shields.io/github/workflow/status/Build-and-Upload-Lean's-K2p-LEDE?label=)
+K2p LEDE ![4](https://img.shields.io/github/workflow/status/Build-and-Upload-Lean's-K2p-LEDE?label=)
 
 
 # 其他
-Gitea ![](https://img.shields.io/github/workflow/status/Build-Gitea?label=)
+Gitea ![5](https://img.shields.io/github/workflow/status/Build-Gitea?label=)
