@@ -9,7 +9,7 @@ on:
       - 'lean-lede/x86_64/.config'
       - 'lean-lede/x86_64/run'
   schedule:
-        - cron: 0 */6 * * *
+        - cron: 0 */4 * * *
   watch:
       types: [started]
 
