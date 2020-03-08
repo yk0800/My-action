@@ -5,8 +5,8 @@ on:
     branches: 
       - master
     paths:
-      - 'lean-lede/R2S/.config'
-      - 'lean-lede/R2S/run'
+      - 'lean-lede/r2s/.config'
+      - 'lean-lede/r2s/run'
   schedule:
         - cron: 0 */6 * * *
 jobs:
