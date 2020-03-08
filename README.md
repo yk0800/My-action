@@ -3,7 +3,7 @@
 ### 4小时更新一次
 编译后自动回传到国内下载站，方便网络不稳定的用户下载。
 
-下载地址https://dl.ssrc.vip:88/Router/
+下载地址https://ilede.site:88/Router/
 
 # 构建状态：
 x86_64 LEDE ![1](https://img.shields.io/github/workflow/status/1orz/My-action/Build-and-Upload-Lean's-x86_64-LEDE)
