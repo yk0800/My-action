@@ -1,0 +1,55 @@
+name: Build-Gogs
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - 'gogs/run'
+      - '.github/workflows/Build-Gogs.yml'
+  schedule:
+
+        - cron: 0 */4 * * *
+
+jobs:
+
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: Set up Go 1.14
+      uses: actions/setup-go@v1
+      with:
+        go-version: 1.14
+      id: go
+
+    - name: Use Node.js 12.x
+      uses: actions/setup-node@v1
+      with:
+        node-version: 12.x
+
+    - name: Get Gogs source
+      run: |
+        git clone --depth 1 https://github.com/gogs/gogs.git gogs
+
+        
+    - name: Build
+      run: |
+        cd gogs
+        node -v
+        go version
+        go build -tags "sqlite pam cert" -o gogs
+        
+    - name: Upload Flies
+      uses: actions/upload-artifact@master
+      if: always()
+      with:
+       name: Gogs
+       path: gogs/gogs
+        
+    - name: Upload Binary Files to Remote Download Station.
+      if: success()
+      run: |
+        cd gogs
+        zip -o Gogs.zip gogs
+        curl --socks5 "${{ secrets.PROXY_ADDR }}" -U "${{ secrets.PROXY_USER }}" -F "token=${{ secrets.UPLOAD_TOKEN }}" -F "location=Software/Linux/Gogs" -F "file=@Gogs.zip" ${{ secrets.REMOTE_UPLOAD_PROCESSOR }}
