@@ -59,9 +59,9 @@ jobs:
     - name: Multi-core compile
       run: |
         cd lede
-        #echo -e "$(nproc) thread compile"
+        echo -e "$(nproc) thread compile"
         df -h
-        make -j4
+        make -j$(nproc)
         df -h
 
     - name: Single-core compile
