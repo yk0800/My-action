@@ -31,6 +31,8 @@ jobs:
     - name: Get Gogs source
       run: |
         git clone --depth 1 https://github.com/gogs/gogs.git gogs
+        sudo apt update -qq
+        sudo apt install -y libpam0g-dev
 
         
     - name: Build
