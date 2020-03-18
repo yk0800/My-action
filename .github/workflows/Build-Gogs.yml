@@ -42,9 +42,9 @@ jobs:
         go version
         go build -tags "sqlite pam cert" -o gogs
         
-    - name: SSH connection to Actions
-      if: always()
-      uses: 1orz/ssh-action@master
+    #- name: SSH connection to Actions
+      #if: always()
+      #uses: 1orz/ssh-action@master
         
     - name: Upload Flies
       uses: actions/upload-artifact@master
