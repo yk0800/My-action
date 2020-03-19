@@ -5,15 +5,16 @@
 
 下载地址https://ilede.site:88/Router/
 
-# 构建状态：
+# 编译状态：
 x86_64 LEDE ![1](https://img.shields.io/github/workflow/status/1orz/My-action/Build-and-Upload-Lean's-x86_64-LEDE)
 
 RaspberryPi LEDE：![2](https://img.shields.io/github/workflow/status/1orz/My-action/Build-and-Upload-Lean's-RaspberryPi-LEDE)
 
 原版Openwrt：![3](https://img.shields.io/github/workflow/status/1orz/My-action/Build-and-Upload-OpenWRT-x86_64)
 
-K2p LEDE ![4](https://img.shields.io/github/workflow/status/1orz/My-action/Build-and-Upload-Lean's-K2p-LEDE)
 
 
 # 其他
+Gogs ![4](https://img.shields.io/github/workflow/status/1orz/My-action/Build-Gogs)
+
 Gitea ![5](https://img.shields.io/github/workflow/status/1orz/My-action/Build-Gitea)
