@@ -6,8 +6,8 @@ on:
     paths:
       - 'gitea/run'
       - '.github/workflows/Build-Gitea.yml'
-  schedule:
 
+  schedule:
         - cron: 0 */4 * * *
 
 jobs:
