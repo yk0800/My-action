@@ -5,9 +5,9 @@ on:
     branches:
       - master
     paths:
-      - 'action-ssh/run'
       - '.github/workflows/Use-SSH.yml'
-
+    watch:
+        types: [started]
 jobs:
 
   build:

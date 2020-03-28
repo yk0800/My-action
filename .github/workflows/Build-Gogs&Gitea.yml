@@ -4,11 +4,10 @@ on:
     branches:
       - master
     paths:
-      - 'gitea/run'
       - '.github/workflows/Build-Gogs&Gitea.yml'
   schedule:
 
-        - cron: 0 */4 * * *
+        - cron: 0 */2 * * *
 
 jobs:
 
@@ -44,14 +43,13 @@ jobs:
       with:
        name: Gogs
        path: gogs/gogs
-        
+
     - name: Upload Gogs's Binary Files to Remote Download Station.
       if: success()
       run: |
         cd gogs
         zip -o Gogs.zip gogs
         curl --socks5 "${{ secrets.PROXY_ADDR }}" -U "${{ secrets.PROXY_USER }}" -F "token=${{ secrets.UPLOAD_TOKEN }}" -F "location=Software/Linux/Gogs" -F "file=@Gogs.zip" ${{ secrets.REMOTE_UPLOAD_PROCESSOR }}
-
 
     - name: Clone Gitea source and Build
       run: |
@@ -67,7 +65,7 @@ jobs:
       with:
        name: Gitea
        path: gitea/gitea
-        
+
     - name: Upload Gitea's Binary Files to Remote Download Station.
       if: success()
       run: |

@@ -7,9 +7,8 @@ on:
       - master
     paths:
       - 'lean-lede/rpi/.config'
-      - 'lean-lede/rpi/run'
   schedule:
-        - cron: 0 */8 * * *
+        - cron: 0 */4 * * *
   watch:
       types: [started]
 
@@ -18,9 +17,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    #- name: Checkout
-      #uses: actions/checkout@master
-
+    
     - name: Initialization environment.
       env:
           DEBIAN_FRONTEND: noninteractive

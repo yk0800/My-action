@@ -5,19 +5,14 @@ on:
       - master
     paths:
       - 'lean-lede/x86_64/.config'
-      - 'lean-lede/x86_64/run'
   schedule:
         - cron: 0 */4 * * *
-  watch:
-      types: [started]
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    #- name: Checkout
-      #uses: actions/checkout@master
-
+    
     - name: Initialization environment.
       env:
           DEBIAN_FRONTEND: noninteractive
