@@ -5,7 +5,7 @@ on:
       - master
     paths:
       - 'gitea/run'
-      - '.github/workflows/Build-Gogs.yml'
+      - '.github/workflows/Build-Gogs&Gitea.yml'
   schedule:
 
         - cron: 0 */4 * * *
@@ -13,7 +13,7 @@ on:
 jobs:
 
   build:
-    name: Build
+    name: Build Gogs&Gitea
     runs-on: ubuntu-latest
     steps:
 
@@ -21,32 +21,24 @@ jobs:
       uses: actions/setup-go@v1
       with:
         go-version: 1.14
-      id: go
-
+      
     - name: Use Node.js 12.x
       uses: actions/setup-node@v1
       with:
         node-version: 12.x
 
-    - name: Get Gogs source
+    - name: Clone Gogs source and Build
+      if: always()
       run: |
-        git clone --depth 1 https://github.com/gogs/gogs.git gogs
+        git clone https://github.com/gogs/gogs.git gogs
         sudo apt update -qq
         sudo apt install -y libpam0g-dev
-
-        
-    - name: Build
-      run: |
         cd gogs
         node -v
         go version
         go build -tags "sqlite pam cert" -o gogs
-        
-    #- name: SSH connection to Actions
-      #if: always()
-      #uses: 1orz/ssh-action@master
-        
-    - name: Upload Flies
+
+    - name: Upload Flies to Github Actions
       uses: actions/upload-artifact@master
       if: always()
       with:
@@ -61,25 +53,22 @@ jobs:
         curl --socks5 "${{ secrets.PROXY_ADDR }}" -U "${{ secrets.PROXY_USER }}" -F "token=${{ secrets.UPLOAD_TOKEN }}" -F "location=Software/Linux/Gogs" -F "file=@Gogs.zip" ${{ secrets.REMOTE_UPLOAD_PROCESSOR }}
 
 
-    - name: Get Gitea source
+    - name: Clone Gitea source and Build
       run: |
         git clone https://github.com/go-gitea/gitea.git
-        
-    - name: Build
-      run: |
         cd gitea
         node -v
         go version
         TAGS="bindata sqlite sqlite_unlock_notify" make build
-        
-    - name: Upload Flies
+
+    - name: Upload Flies to Github Actions
       uses: actions/upload-artifact@master
       if: always()
       with:
        name: Gitea
        path: gitea/gitea
         
-    - name: Upload Binary Files to Remote Download Station.
+    - name: Upload Gitea's Binary Files to Remote Download Station.
       if: success()
       run: |
         cd gitea
