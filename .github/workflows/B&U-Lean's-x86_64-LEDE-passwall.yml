@@ -1,10 +1,10 @@
-name: Build-and-Upload-Lean's-x86_64-LEDE
+name: Build-and-Upload-Lean's-x86_64-LEDE-passwall
 on:
   push:
     branches: 
       - master
     paths:
-      - 'lean-lede/x86_64/.config'
+      - 'lean-lede/x86_64/passwall/.config'
   schedule:
         - cron: 0 */4 * * *
 
@@ -39,7 +39,7 @@ jobs:
     - name: Download and Load custom configuration
       run: |
         cd lede
-        curl -fsSL https://raw.githubusercontent.com/1orz/My-action/master/lean-lede/x86_64/.config >.config
+        curl -fsSL https://raw.githubusercontent.com/1orz/My-action/master/lean-lede/x86_64/passwall/.config >.config
         bash <(curl -fsSL https://raw.githubusercontent.com/1orz/My-action/master/lean-lede/x86_64/diy.sh)
         ./scripts/feeds install -a
         make defconfig
@@ -93,4 +93,4 @@ jobs:
       run: |
         cd lede/bin/targets/*/*
         zip -r -o x86_64.zip ./
-        curl --socks5 "${{ secrets.PROXY_ADDR }}" -U "${{ secrets.PROXY_USER }}" -F "token=${{ secrets.UPLOAD_TOKEN }}" -F "location=Router/LEDE/x86_64/Lean" -F "file=@x86_64.zip" ${{ secrets.REMOTE_UPLOAD_PROCESSOR }}
+        curl --socks5 "${{ secrets.PROXY_ADDR }}" -U "${{ secrets.PROXY_USER }}" -F "token=${{ secrets.UPLOAD_TOKEN }}" -F "location=Router/LEDE/x86_64/Lean-passwall" -F "file=@x86_64.zip" ${{ secrets.REMOTE_UPLOAD_PROCESSOR }}
