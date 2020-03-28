@@ -1,10 +1,10 @@
-name: Build-Gogs
+name: Build-Gogs&Gitea
 on:
   push:
     branches:
       - master
     paths:
-      - 'gogs/run'
+      - 'gitea/run'
       - '.github/workflows/Build-Gogs.yml'
   schedule:
 
@@ -53,9 +53,35 @@ jobs:
        name: Gogs
        path: gogs/gogs
         
-    - name: Upload Binary Files to Remote Download Station.
+    - name: Upload Gogs's Binary Files to Remote Download Station.
       if: success()
       run: |
         cd gogs
         zip -o Gogs.zip gogs
         curl --socks5 "${{ secrets.PROXY_ADDR }}" -U "${{ secrets.PROXY_USER }}" -F "token=${{ secrets.UPLOAD_TOKEN }}" -F "location=Software/Linux/Gogs" -F "file=@Gogs.zip" ${{ secrets.REMOTE_UPLOAD_PROCESSOR }}
+
+
+    - name: Get Gitea source
+      run: |
+        git clone https://github.com/go-gitea/gitea.git
+        
+    - name: Build
+      run: |
+        cd gitea
+        node -v
+        go version
+        TAGS="bindata sqlite sqlite_unlock_notify" make build
+        
+    - name: Upload Flies
+      uses: actions/upload-artifact@master
+      if: always()
+      with:
+       name: Gitea
+       path: gitea/gitea
+        
+    - name: Upload Binary Files to Remote Download Station.
+      if: success()
+      run: |
+        cd gitea
+        zip -o Gitea.zip gitea
+        curl --socks5 "${{ secrets.PROXY_ADDR }}" -U "${{ secrets.PROXY_USER }}" -F "token=${{ secrets.UPLOAD_TOKEN }}" -F "location=Software/Linux/Gitea" -F "file=@Gitea.zip" ${{ secrets.REMOTE_UPLOAD_PROCESSOR }}
